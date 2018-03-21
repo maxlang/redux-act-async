@@ -1,11 +1,11 @@
 import createActionAsync, {ASYNC_META} from './createActionAsync';
 import createReducerAsync from './createReducerAsync';
-import createReducerMetaAsync from './createReducerMetaAsync';
+import createMetaReducerAsync from './createMetaReducerAsync';
 
 
 export {
   ASYNC_META,
   createActionAsync,
   createReducerAsync,
-  createReducerMetaAsync,
+  createMetaReducerAsync,
 }
