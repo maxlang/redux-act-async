@@ -38,7 +38,8 @@ export default function createActionAsync(description, api, options = defaultOpt
     noRethrow: options.noRethrow !== undefined ? options.noRethrow : defaultOption.noRethrow,
     request: objectAssign({}, defaultOption.request, options.request),
     ok: objectAssign({}, defaultOption.ok, options.ok),
-    error: objectAssign({}, defaultOption.error, options.error)
+    error: objectAssign({}, defaultOption.error, options.error),
+    reset: objectAssign({}, defaultOption.reset, options.reset)
   };
 
   let actions = {
