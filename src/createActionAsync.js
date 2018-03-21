@@ -36,6 +36,7 @@ const defaultOption = {
 export default function createActionAsync(description, api, options = defaultOption) {
 
   options = {
+    keyFn: options.keyFn,
     noRethrow: options.noRethrow !== undefined ? options.noRethrow : defaultOption.noRethrow,
     request: objectAssign({}, defaultOption.request, options.request),
     ok: objectAssign({}, defaultOption.ok, options.ok),
@@ -52,7 +53,7 @@ export default function createActionAsync(description, api, options = defaultOpt
 
   let actionAsync = (...args) => {
     return (dispatch, getState) => {
-      const key = keyFn && keyFn(...args);
+      const key = options.keyFn && options.keyFn(...args);
       dispatch(actions.request(...args, key));
       if(options.request.callback) options.request.callback(dispatch, getState, ...args);
       return api(...args, dispatch, getState)
