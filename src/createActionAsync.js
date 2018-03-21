@@ -9,25 +9,26 @@ export const ASYNC_META = {
 }
 
 const defaultOption = {
+  keyFn: null,
   noRethrow: false,
   request:{
-    metaReducer: (meta) => {
-      return ASYNC_META.REQUEST
+    metaReducer: (...args) => {
+      return args[args.length - 1]
     }
   },
   ok:{
-    metaReducer: () => {
-      return ASYNC_META.OK
+    metaReducer: (...args) => {
+      return args[args.length - 1]
     }
   },
   error:{
-    metaReducer: () => {
-      return ASYNC_META.ERROR
+    metaReducer: (...args) => {
+      return args[args.length - 1]
     }
   },
   reset:{
-    metaReducer: () => {
-      return ASYNC_META.RESET
+    metaReducer: (...args) => {
+      return args[args.length - 1]
     }
   }
 }
@@ -51,7 +52,8 @@ export default function createActionAsync(description, api, options = defaultOpt
 
   let actionAsync = (...args) => {
     return (dispatch, getState) => {
-      dispatch(actions.request(...args));
+      const key = keyFn && keyFn(...args);
+      dispatch(actions.request(...args, key));
       if(options.request.callback) options.request.callback(dispatch, getState, ...args);
       return api(...args, dispatch, getState)
       .then(response => {
@@ -60,7 +62,7 @@ export default function createActionAsync(description, api, options = defaultOpt
             response: response
         }
 
-        dispatch(actions.ok(out))
+        dispatch(actions.ok(out, key))
         if(options.ok.callback) options.ok.callback(dispatch, getState, response, ...args);
         return out;
       })
@@ -70,7 +72,7 @@ export default function createActionAsync(description, api, options = defaultOpt
             request: args,
             error: error
         }
-        dispatch(actions.error(errorOut))
+        dispatch(actions.error(errorOut, key))
         if(options.error.callback) options.error.callback(dispatch, getState, errorOut, ...args);
         if(!options.noRethrow) throw errorOut;
       })
