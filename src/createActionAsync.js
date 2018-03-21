@@ -24,6 +24,11 @@ const defaultOption = {
     metaReducer: () => {
       return ASYNC_META.ERROR
     }
+  },
+  reset:{
+    metaReducer: () => {
+      return ASYNC_META.RESET
+    }
   }
 }
 
@@ -40,7 +45,7 @@ export default function createActionAsync(description, api, options = defaultOpt
     request: createAction(`${description}_${ASYNC_META.REQUEST}`, options.request.payloadReducer, options.request.metaReducer),
     ok: createAction(`${description}_${ASYNC_META.OK}`, options.ok.payloadReducer, options.ok.metaReducer),
     error: createAction(`${description}_${ASYNC_META.ERROR}`, options.error.payloadReducer, options.error.metaReducer),
-    reset: createAction(`${description}_${ASYNC_META.RESET}`)
+    reset: createAction(`${description}_${ASYNC_META.RESET}`, options.reset.payloadReducer, options.reset.metaReducer)
   }
 
   let actionAsync = (...args) => {
