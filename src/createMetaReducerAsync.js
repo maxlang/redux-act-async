@@ -1,4 +1,4 @@
-import createReducerAsync, { defaultState } from './createReducerAsync';
+import createReducerAsync, { defaultsState } from './createReducerAsync';
 
 export default function createMetaReducerAsync(actionAsync, defaultState = defaultsState) {
   const reducer = createReducerAsync(asyncAction, defaultsState);
