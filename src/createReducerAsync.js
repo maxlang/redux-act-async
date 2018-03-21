@@ -1,6 +1,6 @@
 import {createReducer} from 'redux-act';
 
-const defaultsState = {
+export const defaultsState = {
     loading: false,
     request: null,
     data: null,
