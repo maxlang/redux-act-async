@@ -33,7 +33,7 @@
     "babel-preset-stage-0": "6.16.0",
     "chai": "3.5.0",
     "chai-spies": "0.7.1",
-    "eslint": "3.11.1",
+    "eslint": "^4.19.0",
     "eslint-config-standard": "6.2.1",
     "eslint-loader": "1.6.1",
     "eslint-plugin-babel": "4.0.0",
@@ -59,6 +59,8 @@
   },
   "dependencies": {
     "babel-runtime": "^6.18.0",
+    "eslint-plugin-mocha": "^4.12.1",
+    "global": "^4.3.2",
     "object-assign": "^4.1.1",
     "redux-act": "^1.1.0"
   }
