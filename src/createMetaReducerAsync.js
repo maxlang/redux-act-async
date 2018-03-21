@@ -9,7 +9,7 @@ export default function createMetaReducerAsync(actionAsync, defaultState = defau
           case actionAsync.ok.toString():
           case actionAsync.error.toString():
           case actionAsync.reset.toString():
-              return {...state, [action.meta]: reducer(state, action)}
+              return {...state, [action.meta]: reducer(state[action.meta], action)}
           break;
           default:
               return state;
